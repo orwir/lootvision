@@ -1,6 +1,7 @@
 import type { GatsbyConfig } from "gatsby";
 
 const config: GatsbyConfig = {
+  pathPrefix: "/lootvision",
   siteMetadata: {
     title: `lootvision`,
     siteUrl: `https://www.yourdomain.tld`
