@@ -1,6 +1,5 @@
 import React from 'react';
 import Seo from '../components/seo';
-import Game from '@/components/filter/game';
 import Layout from '@/components/layout';
 
 export default function IndexPage() {

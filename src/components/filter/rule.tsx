@@ -12,7 +12,7 @@ export default function Rule({ rule }: { rule: RuleModel }) {
     values.reduce((max, value) => Math.max(value.label.length, max), 0);
 
   return (
-    <div key={rule.id} className="border pe-2 ps-2">
+    <div className="border pe-2 ps-2">
       <div className="flex flex-row items-center space-x-3 border-b pb-2 pt-2">
         <div className="flex-grow">{rule.label}</div>
         <IconButton
@@ -42,6 +42,7 @@ export default function Rule({ rule }: { rule: RuleModel }) {
               <div>Actions:</div>
               {rule.actions.map((action) => (
                 <Action
+                  key={action.id}
                   action={action}
                   config={{ width: maxWidth(rule.actions), editable: editable }}
                 />
@@ -51,6 +52,7 @@ export default function Rule({ rule }: { rule: RuleModel }) {
               <div>Conditions:</div>
               {rule.conditions.map((condition) => (
                 <Condition
+                  key={condition.id}
                   condition={condition}
                   config={{
                     width: maxWidth(rule.conditions),

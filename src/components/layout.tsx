@@ -1,12 +1,25 @@
-import { Link } from 'gatsby';
 import React from 'react';
+import { graphql, Link, useStaticQuery, withPrefix } from 'gatsby';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
+  const metadata: SiteMetadata = useStaticQuery(graphql`
+    query {
+      allInfoYaml {
+        nodes {
+          version
+          label
+        }
+      }
+    }
+  `);
+
   return (
     <div>
       <div className="flex flex-row space-x-2 px-2 py-3">
-        {gameLinks.map((game) => (
-          <Link to={game.to}>{game.label}</Link>
+        {metadata.allInfoYaml.nodes.map((item) => (
+          <Link key={item.version} to={withPrefix(item.version)}>
+            {item.label}
+          </Link>
         ))}
       </div>
       <div className="px-2">{children}</div>
@@ -14,13 +27,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 
-const gameLinks = [
-  {
-    to: '/poe1',
-    label: 'PoE 1',
-  },
-  {
-    to: '/poe2',
-    label: 'PoE 2',
-  },
-];
+type SiteMetadata = {
+  allInfoYaml: {
+    nodes: { version: string; label: string }[];
+  };
+};
