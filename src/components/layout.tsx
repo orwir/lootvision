@@ -1,5 +1,5 @@
 import React from 'react';
-import { graphql, Link, useStaticQuery, withPrefix } from 'gatsby';
+import { graphql, Link, useStaticQuery } from 'gatsby';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const metadata: SiteMetadata = useStaticQuery(graphql`
@@ -17,7 +17,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <div>
       <div className="flex flex-row space-x-2 px-2 py-3">
         {metadata.allInfoYaml.nodes.map((item) => (
-          <Link key={item.version} to={withPrefix(item.version)}>
+          <Link key={item.version} to={`/${item.version}`}>
             {item.label}
           </Link>
         ))}
