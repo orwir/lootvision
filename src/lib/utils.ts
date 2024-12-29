@@ -1,55 +1,49 @@
-import Game from '@/components/filter/game';
-import Layout from '@/components/layout';
-import Seo from '@/components/seo';
-import { graphql } from 'gatsby';
-import React from 'react';
+import { Filter } from './data';
 
-export default function GamePage({
-  data,
-  children,
-}: {
-  data: Data;
-  children: React.ReactNode;
-}) {
-  return (
-    <Layout>
-      <Game filters={dataExample} />
-    </Layout>
-  );
+export function obtainFilter(game: string, id: string): Filter | null {
+  // const filters: Record<string, Filter> | null = getItem('filters');
+  // if (filters) return filters[`${game}:${id}`];
+  return dataExample[0];
 }
 
-export const Head = ({ data }: { data: Data }) => (
-  <Seo title={data.infoYaml.label} />
-);
+export function obtainFilters(game: string): Filter[] {
+  return dataExample;
+}
 
-export const query = graphql`
-  query ($version: String) {
-    infoYaml(version: { eq: $version }) {
-      label
-      version
-    }
-  }
-`;
+export function saveFilter(filter: Filter): void {
+  // const game: { filters?: Record<string, Filter> } = getItem('game') ?? {};
+  // const filters: Record<string, Filter> | null = getItem('filters') ?? {};
+  // filters[`${game}:${id}`] = filter;
+  // setItem('filters', filters);
+}
 
-type Data = {
-  infoYaml: {
-    label: string;
-    version: string;
-  };
-};
+function getItem<T>(key: string): T | null {
+  const jsonValue = localStorage.getItem(key);
+  const value = jsonValue ? JSON.parse(jsonValue) : null;
+  return value;
+}
 
-const dataExample = [
+function setItem<T>(key: string, value: T): void {
+  const jsonValue = JSON.stringify(value);
+  localStorage.setItem(key, jsonValue);
+}
+
+export const dataExample: Filter[] = [
   {
     id: '1',
-    label: 'Filter #1',
+    name: 'Filter #1',
+    description: 'The very first filter',
+    version: '3.25',
+    league: 'Settlers of Kalguur',
+    lastUpdated: new Date(),
     categories: [
       {
         id: '1',
-        label: 'Currency',
+        name: 'Currency',
         rules: [
           {
             id: '1',
-            label: 'Currency: Tier 0',
+            name: 'Tier 0',
             description:
               'Highlight highly valuable currency such as divines and mirrors',
             actions: [
@@ -125,7 +119,7 @@ const dataExample = [
           },
           {
             id: '2',
-            label: 'Currency: Tier 1',
+            name: 'Tier 1',
             description:
               'Highlight valuable currency such as exalted orbs, chaos orbs, etc',
             actions: [
@@ -201,7 +195,7 @@ const dataExample = [
           },
           {
             id: '3',
-            label: 'Currency: Tier 3',
+            name: 'Tier 3',
             description:
               'Highlight currency such as regal orbs, transmutation orbs',
             actions: [
@@ -279,59 +273,71 @@ const dataExample = [
       },
       {
         id: '2',
-        label: 'Delirium',
+        name: 'Delirium',
         rules: [],
       },
       {
         id: '3',
-        label: 'Breach',
+        name: 'Breach',
         rules: [],
       },
       {
         id: '4',
-        label: 'Fragments',
+        name: 'Fragments',
         rules: [],
       },
       {
         id: '5',
-        label: 'Expedition',
+        name: 'Expedition',
         rules: [],
       },
       {
         id: '6',
-        label: 'Essences',
+        name: 'Essences',
         rules: [],
       },
       {
         id: '7',
-        label: 'Runes',
+        name: 'Runes',
         rules: [],
       },
       {
         id: '8',
-        label: 'Omens',
+        name: 'Omens',
         rules: [],
       },
       {
         id: '9',
-        label: 'Gems (Skill, Spirit, Support)',
+        name: 'Gems (Skill, Spirit, Support)',
         rules: [],
       },
     ],
   },
   {
     id: '2',
-    label: 'Filter #2',
+    name: 'Filter #2',
+    description: 'Next cool filter',
+    version: '3.25',
+    league: 'Settlers of Kalguur',
+    lastUpdated: new Date(),
     categories: [],
   },
   {
     id: '3',
-    label: 'Filter #3',
+    name: 'Filter #3',
+    description: 'Filter for juicy MF guys',
+    version: '3.25',
+    league: 'Settlers of Kalguur',
+    lastUpdated: new Date(),
     categories: [],
   },
   {
     id: '4',
-    label: 'Filter #4',
+    name: 'Filter #4',
+    description: 'The krangled one!',
+    version: '3.25',
+    league: 'Settlers of Kalguur',
+    lastUpdated: new Date(),
     categories: [],
   },
 ];

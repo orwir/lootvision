@@ -1,18 +1,22 @@
 export type Filter = {
   id: string;
-  label: string;
+  name: string;
+  description: string;
+  version: string;
+  league: string;
+  lastUpdated: Date;
   categories: Category[];
 };
 
 export type Category = {
   id: string;
-  label: string;
+  name: string;
   rules: Rule[];
 };
 
 export type Rule = {
   id: string;
-  label: string;
+  name: string;
   description: string;
   actions: Action[];
   conditions: Condition[];

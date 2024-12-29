@@ -15,14 +15,13 @@ const config: GatsbyConfig = {
     'gatsby-plugin-postcss',
     'gatsby-plugin-sharp',
     'gatsby-plugin-image',
-    'gatsby-transformer-yaml',
     {
       resolve: 'gatsby-plugin-alias-imports',
       options: {
         alias: {
           '@': path.resolve(__dirname, 'src'),
         },
-        extensions: ['js', 'ts', 'tsx', 'svg'],
+        extensions: ['js', 'ts', 'tsx', 'svg', 'png', 'jpg', 'jpeg'],
       },
     },
     {
@@ -33,9 +32,8 @@ const config: GatsbyConfig = {
       },
     },
     {
-      resolve: 'gatsby-source-filesystem',
+      resolve: 'gatsby-source-poe-metadata',
       options: {
-        name: 'metadata',
         path: `${__dirname}/metadata/`,
       },
     },

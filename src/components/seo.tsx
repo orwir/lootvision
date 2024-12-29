@@ -14,7 +14,8 @@ export default function Seo({ title }: { title: String }) {
 
   return (
     <title>
-      {title} | {data.site.siteMetadata.title}
+      {title && `${title} | `}
+      {data.site.siteMetadata.title}
     </title>
   );
 }

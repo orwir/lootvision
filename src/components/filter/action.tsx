@@ -10,16 +10,21 @@ export default function Action({
 }) {
   // TODO: implement specific actions based on action type
   return (
-    <div className="flex flex-row space-x-2 border">
-      <div style={{ width: `${config.width}ch` }} className="border">
+    <div className="flex flex-row">
+      <div
+        style={{ width: `${config.width}ch` }}
+        className="border-b border-neutral-500"
+      >
         {action.label}
       </div>
-      <div className="w-[32ch] truncate border pe-2 ps-2">{action.value}</div>
+      <div className="truncate border-b border-neutral-500 pe-2 ps-2">
+        {action.value}
+      </div>
     </div>
   );
 }
 
 export type Config = {
   width: number;
-  editable: boolean;
+  editable?: boolean;
 };

@@ -10,11 +10,14 @@ export default function Condtion({
 }) {
   // TODO: implement specific conditions based on condition type
   return (
-    <div className="flex flex-row space-x-2 border">
-      <div style={{ width: `${config.width}ch` }} className="border">
+    <div className="flex flex-row">
+      <div
+        style={{ width: `${config.width}ch` }}
+        className="border-b border-neutral-500"
+      >
         {condition.label}
       </div>
-      <div className="w-[32ch] truncate border pe-2 ps-2">
+      <div className="truncate border-b border-neutral-500 pe-2 ps-2">
         {condition.value}
       </div>
     </div>
@@ -23,5 +26,5 @@ export default function Condtion({
 
 export type Config = {
   width: number;
-  editable: boolean;
+  editable?: boolean;
 };
