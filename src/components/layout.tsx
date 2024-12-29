@@ -17,7 +17,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     `);
 
   return (
-    <div className="flex h-screen flex-col items-center">
+    <div className="flex min-h-screen flex-col items-center">
       <div className="flex w-full flex-row space-x-3 p-3">
         {versions.allGame.nodes.map((item) => (
           <HeaderLink key={item.version} to={item.version} text={item.name} />
@@ -26,7 +26,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <HeaderLink to="/privacy" text="Privacy" />
         <HeaderLink to="/about" text="About" />
       </div>
-      <div className="h-full w-full px-3">{children}</div>
+      <div className="flex-grow px-3">{children}</div>
       <div className="py-2">
         This product isn't affiliated with or endorsed by Grinding Gear Games in
         any way.

@@ -31,7 +31,7 @@ export default function FilterPage({
 
   return (
     <Layout>
-      <div className="flex h-full flex-col space-y-2">
+      <div className="flex w-[900px] flex-col space-y-2">
         <div className="flex flex-row items-center space-x-4 pe-7 pt-2">
           <div className="w-44 truncate ps-3 text-lg">{filter.name}</div>
           {/* <div className="flex flex-row self-end ps-2">
@@ -57,7 +57,7 @@ export default function FilterPage({
           />
           <IconButton icon="mingcute:settings-6-line" onClick={() => {}} />
         </div>
-        <div className="flex h-full flex-row rounded-md border border-neutral-500">
+        <div className="flex flex-row rounded-md border border-neutral-500">
           <div className="flex w-44 flex-col">
             {filter.categories.map((item, index) => (
               <div key={item.id} className="flex flex-row">
@@ -83,7 +83,7 @@ export default function FilterPage({
               })}
             />
           </div>
-          <div className="flex h-full w-full">
+          <div className="flex w-full">
             {selected.category && (
               <div className="flex w-full flex-col space-y-2 px-4 py-2">
                 {selected.category.rules.map((rule) => (
