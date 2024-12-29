@@ -1,1 +1,1 @@
-{"componentChunkName":"component---src-pages-index-tsx","path":"/","result":{"pageContext":{}},"staticQueryHashes":["3159585216","3489734958"],"slicesMap":{}}
+{"componentChunkName":"component---src-pages-index-tsx","path":"/","result":{"data":{"allGame":{"nodes":[{"version":"poe1","name":"Path of Exile 1"},{"version":"poe2","name":"Path of Exile 2"}]}},"pageContext":{}},"staticQueryHashes":["3159585216","3849697472"],"slicesMap":{}}
