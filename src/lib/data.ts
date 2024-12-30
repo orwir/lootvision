@@ -1,9 +1,9 @@
 export type Filter = {
+  game: string;
+  gameVersion: string;
   id: string;
   name: string;
   description: string;
-  version: string;
-  league: string;
   lastUpdated: Date;
   categories: Category[];
 };

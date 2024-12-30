@@ -1,20 +1,30 @@
 import { Filter } from './data';
 
+export function uuidv4() {
+  return '10000000-1000-4000-8000-100000000000'.replace(/[018]/g, (c) =>
+    (
+      +c ^
+      (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (+c / 4)))
+    ).toString(16)
+  );
+}
+
 export function obtainFilter(game: string, id: string): Filter | null {
-  // const filters: Record<string, Filter> | null = getItem('filters');
-  // if (filters) return filters[`${game}:${id}`];
-  return dataExample[0];
+  const data: Record<string, Filter> = getItem('filters_' + game) || {};
+  return data[id];
+  // return dataExample[0];
 }
 
 export function obtainFilters(game: string): Filter[] {
-  return dataExample;
+  const data = getItem('filters_' + game) || {};
+  return Object.values(data);
 }
 
 export function saveFilter(filter: Filter): void {
-  // const game: { filters?: Record<string, Filter> } = getItem('game') ?? {};
-  // const filters: Record<string, Filter> | null = getItem('filters') ?? {};
-  // filters[`${game}:${id}`] = filter;
-  // setItem('filters', filters);
+  const key = 'filters_' + filter.game;
+  const data: Record<string, Filter> = getItem(key) || {};
+  data[filter.id] = filter;
+  setItem(key, data);
 }
 
 function getItem<T>(key: string): T | null {
@@ -30,11 +40,11 @@ function setItem<T>(key: string, value: T): void {
 
 export const dataExample: Filter[] = [
   {
+    game: 'poe1',
     id: '1',
     name: 'Filter #1',
     description: 'The very first filter',
-    version: '3.25',
-    league: 'Settlers of Kalguur',
+    gameVersion: '3.25',
     lastUpdated: new Date(),
     categories: [
       {
@@ -314,29 +324,29 @@ export const dataExample: Filter[] = [
     ],
   },
   {
+    game: 'poe1',
     id: '2',
     name: 'Filter #2',
     description: 'Next cool filter',
-    version: '3.25',
-    league: 'Settlers of Kalguur',
+    gameVersion: '3.25',
     lastUpdated: new Date(),
     categories: [],
   },
   {
+    game: 'poe2',
     id: '3',
     name: 'Filter #3',
     description: 'Filter for juicy MF guys',
-    version: '3.25',
-    league: 'Settlers of Kalguur',
+    gameVersion: '3.25',
     lastUpdated: new Date(),
     categories: [],
   },
   {
+    game: 'poe2',
     id: '4',
     name: 'Filter #4',
     description: 'The krangled one!',
-    version: '3.25',
-    league: 'Settlers of Kalguur',
+    gameVersion: '3.25',
     lastUpdated: new Date(),
     categories: [],
   },

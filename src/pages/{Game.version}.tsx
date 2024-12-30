@@ -2,7 +2,8 @@ import Layout from '@/components/layout';
 import Seo from '@/components/seo';
 import { IconButton } from '@/components/widgets';
 import { obtainFilters } from '@/lib/utils';
-import { Link } from 'gatsby';
+import clsx from 'clsx';
+import { Link, navigate } from 'gatsby';
 import React from 'react';
 
 export default function GamePage({
@@ -14,9 +15,9 @@ export default function GamePage({
 
   return (
     <Layout>
-      <div className="flex justify-center">
-        {filters.length && (
-          <div className="w-[480px]">
+      <div className="flex h-full flex-col items-center">
+        <div className="w-[480px]">
+          {filters.length > 0 && (
             <div className="flex flex-col items-center space-y-1">
               {filters.map((filter) => (
                 <Link
@@ -53,22 +54,33 @@ export default function GamePage({
                 </Link>
               ))}
             </div>
-            <div className="flex w-full flex-row justify-between space-x-4 pt-4">
-              <button
-                className="w-1/2 rounded-md border p-2 hover:bg-neutral-900 hover:text-amber-600"
-                onClick={() => {}}
-              >
-                Create
-              </button>
-              <button
-                className="w-1/2 rounded-md border p-2 hover:bg-neutral-900 hover:text-amber-600"
-                onClick={() => {}}
-              >
-                Import
-              </button>
+          )}
+          {!filters.length && (
+            <div className="flex h-96 w-full flex-col justify-center space-y-8 rounded-md border border-amber-600 bg-neutral-950 px-8 text-center text-lg">
+              <div>Filters created are saved locally to the browser.</div>
+              <div>
+                Import any filter that works in Path of Exile or create a new
+                one.
+              </div>
             </div>
+          )}
+          <div className="flex w-full flex-row justify-between space-x-4 pt-4">
+            <button
+              className="w-1/2 rounded-md border p-2 hover:bg-neutral-900 hover:text-amber-600"
+              onClick={() => {
+                navigate(`/${pageContext.version}/filter`);
+              }}
+            >
+              Create
+            </button>
+            <button
+              className="w-1/2 rounded-md border p-2 hover:bg-neutral-900 hover:text-amber-600"
+              onClick={importFilter}
+            >
+              Import
+            </button>
           </div>
-        )}
+        </div>
       </div>
     </Layout>
   );
@@ -82,3 +94,7 @@ type GameMetadata = {
   version: string;
   name: string;
 };
+
+function importFilter() {
+  alert('import filter');
+}

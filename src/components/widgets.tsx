@@ -1,16 +1,23 @@
 import { Icon, IconifyIcon } from '@iconify/react';
+import clsx from 'clsx';
 import React, { MouseEventHandler, useEffect, useRef, useState } from 'react';
 
 export function IconButton({
   icon,
+  text,
   onClick,
 }: {
   icon: string | IconifyIcon;
+  text?: string;
   onClick: MouseEventHandler<HTMLButtonElement>;
 }) {
   return (
-    <button onClick={onClick} className="hover:text-amber-600">
+    <button
+      onClick={onClick}
+      className="flex h-max flex-row items-center space-x-2 text-left hover:text-amber-500"
+    >
       <Icon icon={icon} className="h-6 w-6" />
+      {text && <div className="text-lg">{text}</div>}
     </button>
   );
 }
@@ -31,21 +38,7 @@ export function Dropdown<T>({
   const [selected, setSelected] = useState(data[0]);
   const [expanded, setExpanded] = useState(false);
 
-  useEffect(() => {
-    const handleDocumentClick = (event: any) => {
-      if (_ref.current && !_ref.current.contains(event.target)) {
-        setExpanded(false);
-      }
-    };
-
-    document.addEventListener('click', handleDocumentClick, false);
-    document.addEventListener('touchend', handleDocumentClick, false);
-
-    return () => {
-      document.removeEventListener('click', handleDocumentClick, false);
-      document.removeEventListener('touchend', handleDocumentClick, false);
-    };
-  }, []);
+  handleClickOutside(_ref, () => setExpanded(false));
 
   return (
     <div ref={_ref} className="relative inline-block space-y-1">
@@ -78,4 +71,78 @@ export function Dropdown<T>({
       )}
     </div>
   );
+}
+
+export function Editable({
+  className,
+  text,
+  onTextChange,
+}: {
+  className?: string;
+  text: string;
+  onTextChange: (text: string) => void;
+}) {
+  const _ref = useRef<HTMLDivElement>(null);
+  const [edit, setEdit] = useState(false);
+  const [value, setValue] = useState(text);
+
+  handleClickOutside(_ref, () => setEdit(false));
+
+  useEffect(() => {
+    if (!edit && text !== value) onTextChange(value);
+  }, [value, edit]);
+
+  return (
+    <div
+      ref={_ref}
+      onClick={() => setEdit(true)}
+      className="flex hover:cursor-text hover:bg-neutral-900"
+    >
+      {edit ? (
+        <input
+          className={clsx(
+            className,
+            'w-full border-b bg-neutral-900 placeholder-neutral-500 focus:outline-none'
+          )}
+          type="text"
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          onKeyUp={(e) => {
+            if (e.key === 'Enter') setEdit(false);
+          }}
+          placeholder="Enter filter name..."
+          autoFocus
+        />
+      ) : (
+        <div
+          className={clsx(className, 'pointer-events-none', {
+            'text-neutral-500': !value,
+          })}
+        >
+          {value || 'Enter filter name...'}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function handleClickOutside(
+  ref: React.RefObject<HTMLElement>,
+  onClickOutside: () => void
+) {
+  useEffect(() => {
+    const handleDocumentClick = (event: any) => {
+      if (ref.current && !ref.current.contains(event.target)) {
+        onClickOutside();
+      }
+    };
+
+    document.addEventListener('click', handleDocumentClick, false);
+    document.addEventListener('touchend', handleDocumentClick, false);
+
+    return () => {
+      document.removeEventListener('click', handleDocumentClick, false);
+      document.removeEventListener('touchend', handleDocumentClick, false);
+    };
+  }, []);
 }
