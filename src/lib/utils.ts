@@ -1,5 +1,7 @@
 import { Filter } from './data';
 
+const isBrowser = typeof window !== 'undefined';
+
 export function uuidv4() {
   return '10000000-1000-4000-8000-100000000000'.replace(/[018]/g, (c) =>
     (
@@ -21,6 +23,8 @@ export function obtainFilters(game: string): Filter[] {
 }
 
 export function saveFilter(filter: Filter): void {
+  if (!isBrowser) return;
+
   const key = 'filters_' + filter.game;
   const data: Record<string, Filter> = getItem(key) || {};
   data[filter.id] = filter;
@@ -28,6 +32,8 @@ export function saveFilter(filter: Filter): void {
 }
 
 function getItem<T>(key: string): T | null {
+  if (!isBrowser) return null;
+
   const jsonValue = localStorage.getItem(key);
   const value = jsonValue ? JSON.parse(jsonValue) : null;
   return value;
