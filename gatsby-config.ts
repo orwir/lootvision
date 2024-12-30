@@ -2,10 +2,10 @@ import type { GatsbyConfig } from "gatsby";
 import path from 'path';
 
 const config: GatsbyConfig = {
-  pathPrefix: '/lootvision',
+  pathPrefix: '/occamfilter',
   siteMetadata: {
-    title: `Loot Vison`,
-    siteUrl: `https://orwir.github.io/lootvision/`,
+    title: `Occam's Filter`,
+    siteUrl: `https://orwir.github.io/occamfilter/`,
   },
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
   // If you use VSCode you can also use the GraphQL plugin

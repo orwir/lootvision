@@ -22,7 +22,6 @@ export default function FilterPage({
       version: v.version,
     }));
   const saved: Filter | null = obtainFilter(version, id);
-
   if (!saved && id) {
     return <FilterNotFound />;
   }

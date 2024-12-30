@@ -2,6 +2,7 @@ import { Category } from '@/lib/data';
 import clsx from 'clsx';
 import React, { useState } from 'react';
 import { IconButton } from '../widgets';
+import { Icon } from '@iconify/react';
 
 export default function Categories({
   categories,
@@ -25,7 +26,7 @@ export default function Categories({
               onSelected(category);
             }}
             className={clsx(
-              'w-full truncate border-b border-r border-neutral-500 px-3 py-4 text-left text-xl',
+              'flex w-full flex-row items-center space-x-2 border-b border-r border-neutral-500 px-3 py-4 text-left text-xl',
               {
                 'border-b-0 border-r-0 text-amber-600': idx === index,
                 'rounded-tr-md border-t': idx === index + 1,
