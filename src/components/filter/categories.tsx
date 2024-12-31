@@ -59,21 +59,23 @@ export default function Categories() {
             }
           )}
         >
-          {idx === index ? (
-            <Editable
-              className="mx-3 my-4 w-full text-left"
-              text={category.name}
-              placeholder="category..."
-              onTextChange={(name) => onChangeCategoryName(category, name)}
-            />
-          ) : (
-            <button
-              className="w-full px-3 py-4 text-left"
-              onClick={() => onSelectCategory(idx, category)}
-            >
-              {category.name ? category.name : '...'}
-            </button>
-          )}
+          {/* using hidden to avoid the bug where name change doesn't saved if element gone completely */}
+          <Editable
+            className={clsx('mx-3 my-4 w-full text-left', {
+              hidden: idx !== index,
+            })}
+            text={category.name}
+            placeholder="category..."
+            onTextChange={(name) => onChangeCategoryName(category, name)}
+          />
+          <button
+            className={clsx('w-full px-3 py-4 text-left', {
+              hidden: idx === index,
+            })}
+            onClick={() => onSelectCategory(idx, category)}
+          >
+            {category.name ? category.name : '...'}
+          </button>
         </div>
       ))}
       <div
