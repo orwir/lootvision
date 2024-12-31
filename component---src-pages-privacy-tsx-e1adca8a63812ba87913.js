@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkoccamfilter=self.webpackChunkoccamfilter||[]).push([[985],{7979:function(e,n,t){t.r(n),t.d(n,{default:function(){return r}});var c=t(6540);function r(){return c.createElement(c.Fragment,null)}}}]);
+//# sourceMappingURL=component---src-pages-privacy-tsx-e1adca8a63812ba87913.js.map

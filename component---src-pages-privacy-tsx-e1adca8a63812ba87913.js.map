@@ -1,0 +1,1 @@
+{"version":3,"file":"component---src-pages-privacy-tsx-e1adca8a63812ba87913.js","mappings":"0KAEe,SAASA,IACtB,OAAOC,EAAAA,cAAAA,EAAAA,SAAAA,KACT,C","sources":["webpack://occamfilter/./src/pages/privacy.tsx"],"sourcesContent":["import React from 'react';\r\n\r\nexport default function Privacy() {\r\n  return <></>;\r\n}\r\n"],"names":["Privacy","React"],"sourceRoot":""}

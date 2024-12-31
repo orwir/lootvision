@@ -1,0 +1,1 @@
+{"version":3,"file":"component---src-pages-about-tsx-198b82ce6c6483e23b24.js","mappings":"0KAEe,SAASA,IACtB,OAAOC,EAAAA,cAAAA,EAAAA,SAAAA,KACT,C","sources":["webpack://occamfilter/./src/pages/about.tsx"],"sourcesContent":["import React from 'react';\r\n\r\nexport default function About() {\r\n  return <></>;\r\n}\r\n"],"names":["About","React"],"sourceRoot":""}
