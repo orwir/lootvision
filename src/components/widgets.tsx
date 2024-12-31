@@ -14,7 +14,7 @@ export function IconButton({
   return (
     <button
       onClick={onClick}
-      className="flex h-max flex-row items-center space-x-2 text-left hover:text-amber-500"
+      className="flex h-max flex-row items-center space-x-2 text-left hover:text-teal-500"
     >
       <Icon icon={icon} className="h-6 w-6" />
       {text && <div className="text-lg">{text}</div>}
@@ -44,16 +44,16 @@ export function Dropdown<T>({
     <div ref={_ref} className="relative inline-block space-y-1">
       <button
         onClick={() => setExpanded(!expanded)}
-        className="group flex w-48 flex-row items-center justify-end space-x-2 rounded-md border border-neutral-500 px-2 py-2 text-right hover:border-amber-600"
+        className="group flex w-48 flex-row items-center justify-end space-x-2 rounded-md border border-neutral-500 px-2 py-2 text-right hover:border-teal-700"
       >
         <div className="w-full overflow-hidden truncate">{selected.text}</div>
         <Icon
           icon="mingcute:down-small-line"
-          className="h-6 w-6 group-hover:text-amber-600"
+          className="h-6 w-6 group-hover:text-teal-700"
         />
       </button>
       {expanded && (
-        <div className="just absolute flex w-full flex-col items-end truncate rounded-md border border-neutral-500 bg-neutral-950 pe-2">
+        <div className="absolute flex w-full flex-col items-end truncate rounded-md border border-neutral-500 bg-neutral-950 pe-2">
           {data.map((item) => (
             <button
               key={item.text}
@@ -62,7 +62,7 @@ export function Dropdown<T>({
                 setExpanded(false);
                 onSelected(item.value);
               }}
-              className="p-2 hover:text-amber-500"
+              className="p-2 hover:text-teal-500"
             >
               {item.text}
             </button>
@@ -76,33 +76,39 @@ export function Dropdown<T>({
 export function Editable({
   className,
   text,
+  placeholder = '',
   onTextChange,
 }: {
   className?: string;
   text: string;
+  placeholder: string;
   onTextChange: (text: string) => void;
 }) {
   const _ref = useRef<HTMLDivElement>(null);
   const [edit, setEdit] = useState(false);
   const [value, setValue] = useState(text);
 
-  handleClickOutside(_ref, () => setEdit(false));
+  handleClickOutside(_ref, () => {
+    setEdit(false);
+  });
 
   useEffect(() => {
-    if (!edit && text !== value) onTextChange(value);
+    if (!edit && text !== value) {
+      onTextChange(value);
+    }
   }, [value, edit]);
 
   return (
     <div
       ref={_ref}
       onClick={() => setEdit(true)}
-      className="flex hover:cursor-text hover:bg-neutral-900"
+      className="flex hover:cursor-text"
     >
       {edit ? (
         <input
           className={clsx(
             className,
-            'w-full border-b bg-neutral-900 placeholder-neutral-500 focus:outline-none'
+            'w-full border-b bg-neutral-950 placeholder-neutral-400 focus:outline-none'
           )}
           type="text"
           value={value}
@@ -110,16 +116,16 @@ export function Editable({
           onKeyUp={(e) => {
             if (e.key === 'Enter') setEdit(false);
           }}
-          placeholder="Enter filter name..."
+          placeholder={placeholder}
           autoFocus
         />
       ) : (
         <div
           className={clsx(className, 'pointer-events-none', {
-            'text-neutral-500': !value,
+            'text-neutral-400': !value,
           })}
         >
-          {value || 'Enter filter name...'}
+          {value || placeholder}
         </div>
       )}
     </div>

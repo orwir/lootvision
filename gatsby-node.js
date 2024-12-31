@@ -23,6 +23,6 @@ exports.sourceNodes = async ({
     createNode(node);
   };
 
-  createGameVersion('poe1', 'Path of Exile 1');
-  createGameVersion('poe2', 'Path of Exile 2');
+  createGameVersion('poe1', 'Path of Exile I');
+  createGameVersion('poe2', 'Path of Exile II');
 };

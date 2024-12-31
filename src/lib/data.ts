@@ -1,6 +1,9 @@
+import { uuidv4 } from './utils';
+
 export type Filter = {
   game: string;
-  gameVersion: string;
+  leagueVersion: string;
+  leagueName: string;
   id: string;
   name: string;
   description: string;
@@ -36,4 +39,15 @@ export type Condition = {
   description: string;
   name: string;
   value: string;
+};
+
+export const EmptyFilter = {
+  game: '',
+  leagueVersion: '',
+  leagueName: '',
+  id: uuidv4(),
+  name: '',
+  lastUpdated: new Date(),
+  description: '',
+  categories: [],
 };

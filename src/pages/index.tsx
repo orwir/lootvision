@@ -9,20 +9,22 @@ export default function IndexPage({
   data: { allGame: { nodes: { version: string; name: string }[] } };
 }) {
   return (
-    <div className="flex h-screen flex-row items-center justify-center divide-x divide-amber-600">
-      {data.allGame.nodes.map((game, index) => (
-        <Link
-          key={game.version}
-          to={`/${game.version}`}
-          className={clsx(
-            'flex h-full w-1/2 items-center justify-end px-8 text-9xl hover:bg-neutral-900',
-            { 'text-right': index === 0 }
-          )}
-        >
-          {game.name}
-        </Link>
-      ))}
-    </div>
+    <html>
+      <body className="font-ubuntu flex h-screen w-screen flex-col items-center justify-center text-center text-3xl md:text-4xl lg:text-7xl">
+        <div className="w-[20ch]">Simple way to create and manage filters</div>
+        <div className="mb-24 mt-5 flex flex-col space-y-5 md:mt-10 md:flex-row md:space-x-10 md:space-y-0 lg:mt-20 lg:space-x-20">
+          {data.allGame.nodes.map((game) => (
+            <Link
+              className="hover:text-teal-500"
+              key={game.version}
+              to={`/${game.version}`}
+            >
+              {game.name}
+            </Link>
+          ))}
+        </div>
+      </body>
+    </html>
   );
 }
 

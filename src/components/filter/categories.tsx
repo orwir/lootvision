@@ -1,48 +1,86 @@
-import { Category } from '@/lib/data';
 import clsx from 'clsx';
-import React, { useState } from 'react';
-import { IconButton } from '../widgets';
-import { Icon } from '@iconify/react';
+import React, { useContext, useState } from 'react';
+import { Editable, IconButton } from '../widgets';
+import { CategoryContext, FilterContext } from './context';
+import { uuidv4 } from '@/lib/utils';
+import { Category } from '@/lib/data';
 
-export default function Categories({
-  categories,
-  onSelected,
-  onNewCategory,
-}: {
-  categories: Category[];
-  onSelected: (category: Category) => void;
-  onNewCategory: () => void;
-}) {
+export default function Categories() {
+  const { filter, setFilter } = useContext(FilterContext);
+  const { setCategory } = useContext(CategoryContext);
   const [index, setIndex] = useState(0);
-  const lastIndex = categories.length - 1;
+
+  function onSelectCategory(index: number, category: Category) {
+    setIndex(index);
+    setCategory(category);
+  }
+
+  function onNewCategory() {
+    const category = {
+      id: uuidv4(),
+      name: '',
+      rules: [],
+    };
+    setFilter({
+      ...filter,
+      categories: [...filter.categories, category],
+    });
+    setCategory(category);
+    setIndex(filter.categories.length);
+  }
+
+  function onChangeCategoryName(category: Category, name: string) {
+    category = { ...category, name: name };
+
+    setFilter({
+      ...filter,
+      categories: filter.categories.map((v) => {
+        if (v.id === category.id) {
+          return category;
+        }
+        return v;
+      }),
+    });
+    setCategory(category);
+  }
 
   return (
     <div className="flex w-[20ch] flex-col">
-      {categories.map((category, idx) => (
-        <div key={category.id} className="flex flex-row hover:text-amber-500">
-          <button
-            onClick={() => {
-              setIndex(idx);
-              onSelected(category);
-            }}
-            className={clsx(
-              'flex w-full flex-row items-center space-x-2 border-b border-r border-neutral-500 px-3 py-4 text-left text-xl',
-              {
-                'border-b-0 border-r-0 text-amber-600': idx === index,
-                'rounded-tr-md border-t': idx === index + 1,
-                'rounded-br-md': idx === index - 1,
-              }
-            )}
-          >
-            {category.name}
-          </button>
+      {filter.categories.map((category, idx) => (
+        <div
+          key={category.id}
+          className={clsx(
+            'w-full items-center border-b border-r border-neutral-500 text-left text-xl',
+            {
+              'border-b-0 border-r-0 font-bold': idx === index,
+              'rounded-tr-md border-t': idx === index + 1,
+              'rounded-br-md': idx === index - 1,
+              'text-neutral-400 hover:text-teal-500': idx !== index,
+            }
+          )}
+        >
+          {idx === index ? (
+            <Editable
+              className="mx-3 my-4 w-full text-left"
+              text={category.name}
+              placeholder="category..."
+              onTextChange={(name) => onChangeCategoryName(category, name)}
+            />
+          ) : (
+            <button
+              className="w-full px-3 py-4 text-left"
+              onClick={() => onSelectCategory(idx, category)}
+            >
+              {category.name ? category.name : '...'}
+            </button>
+          )}
         </div>
       ))}
       <div
         className={clsx(
           'flex w-[20ch] flex-grow border-r border-neutral-500 px-2 pt-8',
           {
-            'rounded-tr-md border-t': index === lastIndex,
+            'rounded-tr-md border-t': index === filter.categories.length - 1,
           }
         )}
       >

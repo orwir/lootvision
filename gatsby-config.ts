@@ -5,7 +5,7 @@ const config: GatsbyConfig = {
   pathPrefix: '/occamfilter',
   siteMetadata: {
     title: `Occam's Filter`,
-    siteUrl: `https://orwir.github.io/occamfilter/`,
+    siteUrl: `https://orwir.github.io/`,
   },
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
   // If you use VSCode you can also use the GraphQL plugin
@@ -27,7 +27,7 @@ const config: GatsbyConfig = {
     {
       resolve: 'gatsby-plugin-google-fonts',
       options: {
-        fonts: ['Roboto:400,700'],
+        fonts: ['Roboto:400,700', 'Ubuntu'],
         display: 'swap',
       },
     },

@@ -11,15 +11,20 @@ export function uuidv4() {
   );
 }
 
+export function obtainFilters(game: string): Filter[] {
+  const data = getItem('filters_' + game) || {};
+  return Object.values(data);
+  // return dataExample;
+}
+
 export function obtainFilter(game: string, id: string): Filter | null {
   const data: Record<string, Filter> = getItem('filters_' + game) || {};
   return data[id];
   // return dataExample[0];
 }
 
-export function obtainFilters(game: string): Filter[] {
-  const data = getItem('filters_' + game) || {};
-  return Object.values(data);
+export function removeFilter(filter: Filter): void {
+  // TODO: implement
 }
 
 export function saveFilter(filter: Filter): void {
@@ -50,7 +55,8 @@ export const dataExample: Filter[] = [
     id: '1',
     name: 'Filter #1',
     description: 'The very first filter',
-    gameVersion: '3.25',
+    leagueVersion: '3.25',
+    leagueName: 'Settlers of Kalguur',
     lastUpdated: new Date(),
     categories: [
       {
@@ -334,7 +340,8 @@ export const dataExample: Filter[] = [
     id: '2',
     name: 'Filter #2',
     description: 'Next cool filter',
-    gameVersion: '3.25',
+    leagueVersion: '3.25',
+    leagueName: 'Settlers of Kalguur',
     lastUpdated: new Date(),
     categories: [],
   },
@@ -343,7 +350,8 @@ export const dataExample: Filter[] = [
     id: '3',
     name: 'Filter #3',
     description: 'Filter for juicy MF guys',
-    gameVersion: '3.25',
+    leagueVersion: '3.25',
+    leagueName: 'Settlers of Kalguur',
     lastUpdated: new Date(),
     categories: [],
   },
@@ -352,7 +360,8 @@ export const dataExample: Filter[] = [
     id: '4',
     name: 'Filter #4',
     description: 'The krangled one!',
-    gameVersion: '3.25',
+    leagueVersion: '3.25',
+    leagueName: 'Settlers of Kalguur',
     lastUpdated: new Date(),
     categories: [],
   },
