@@ -53,10 +53,10 @@ export default function FilterPage({
         >
           <div className="flex h-full justify-center">
             <div className="flex w-[900px] flex-col space-y-2">
-              <div className="flex flex-row items-center space-x-4 pe-7 pt-2">
+              <div className="flex flex-row items-center space-x-4 pt-2">
                 <div className="w-44">
                   <Editable
-                    className="truncate ps-3 text-lg"
+                    className="truncate px-3 text-lg"
                     text={filter.name}
                     placeholder="filter name..."
                     onTextChange={(text) =>
@@ -67,19 +67,6 @@ export default function FilterPage({
                     }
                   />
                 </div>
-                {/* <div className="flex flex-row self-end ps-2">
-                  <IconButton
-                    icon={
-                      false
-                        ? 'mingcute:square-arrow-up-line'
-                        : 'mingcute:square-arrow-down-line'
-                    }
-                    onClick={() => {
-                      // setExpanded(!expanded);
-                    }}
-                  />
-                  <div className="ps-3">all</div>
-                </div> */}
                 <div className="flex-grow" />
                 <Dropdown
                   data={leagues.map((v) => ({

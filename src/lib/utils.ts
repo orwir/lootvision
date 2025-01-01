@@ -19,8 +19,8 @@ export function obtainFilters(game: string): Filter[] {
 
 export function obtainFilter(game: string, id: string): Filter | null {
   const data: Record<string, Filter> = getItem('filters_' + game) || {};
-  return data[id];
-  // return dataExample[0];
+  // return data[id];
+  return dataExample[0];
 }
 
 export function removeFilter(filter: Filter): void {

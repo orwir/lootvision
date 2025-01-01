@@ -1,8 +1,8 @@
 import Layout from '@/components/layout';
 import Seo from '@/components/seo';
 import { IconButton } from '@/components/widgets';
+import { Filter } from '@/lib/data';
 import { obtainFilters, removeFilter } from '@/lib/utils';
-import clsx from 'clsx';
 import { Link, navigate } from 'gatsby';
 import React, { useState } from 'react';
 
@@ -12,6 +12,20 @@ export default function GamePage({
   pageContext: GameMetadata;
 }) {
   const [filters, setFilters] = useState(obtainFilters(pageContext.version));
+
+  function createFilter() {
+    navigate(`/${pageContext.version}/filter`);
+  }
+
+  function importFilter() {
+    alert('Not implemented yet!');
+  }
+
+  function deleteFilter(event: React.MouseEvent, filter: Filter) {
+    event.preventDefault();
+    setFilters(filters.filter((v) => v.id !== filter.id));
+    removeFilter(filter);
+  }
 
   return (
     <Layout>
@@ -29,11 +43,7 @@ export default function GamePage({
                     <div className="truncate text-lg">{filter.name}</div>
                     <IconButton
                       icon="mingcute:delete-2-line"
-                      onClick={(event) => {
-                        event.preventDefault();
-                        removeFilter(filter);
-                        setFilters(filters.filter((v) => v.id !== filter.id));
-                      }}
+                      onClick={(event) => deleteFilter(event, filter)}
                     />
                   </div>
                   <div className="flex flex-col py-2 pe-2 ps-4">
@@ -66,9 +76,7 @@ export default function GamePage({
           <div className="flex w-full flex-row justify-between space-x-4 pt-4">
             <button
               className="w-1/2 rounded-md border border-neutral-500 p-2 hover:bg-neutral-950 hover:text-teal-500"
-              onClick={() => {
-                navigate(`/${pageContext.version}/filter`);
-              }}
+              onClick={createFilter}
             >
               Create
             </button>
@@ -93,7 +101,3 @@ type GameMetadata = {
   version: string;
   name: string;
 };
-
-function importFilter() {
-  alert('import filter');
-}

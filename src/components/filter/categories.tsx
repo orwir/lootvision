@@ -1,7 +1,7 @@
 import clsx from 'clsx';
-import React, { useContext, useState } from 'react';
-import { Editable, IconButton } from '../widgets';
-import { CategoryContext, FilterContext } from './context';
+import React, { useContext } from 'react';
+import { Editable, IconButton } from '@/components/widgets';
+import { CategoryContext, FilterContext } from '@/components/filter/context';
 import { uuidv4 } from '@/lib/utils';
 import { Category } from '@/lib/data';
 
@@ -10,11 +10,11 @@ export default function Categories() {
   const { category, setCategory } = useContext(CategoryContext);
   const index = category ? filter.categories.indexOf(category) : -1;
 
-  function onSelectCategory(category: Category) {
+  function selectCategory(category: Category) {
     setCategory(category);
   }
 
-  function onNewCategory() {
+  function createCategory() {
     const category = {
       id: uuidv4(),
       name: '',
@@ -27,7 +27,7 @@ export default function Categories() {
     setCategory(category);
   }
 
-  function onChangeCategoryName(category: Category, name: string) {
+  function changeCategoryName(category: Category, name: string) {
     category = { ...category, name: name };
 
     setFilter({
@@ -64,13 +64,13 @@ export default function Categories() {
             })}
             text={category.name}
             placeholder="category..."
-            onTextChange={(name) => onChangeCategoryName(category, name)}
+            onTextChange={(name) => changeCategoryName(category, name)}
           />
           <button
             className={clsx('w-full truncate px-3 py-4 text-left', {
               hidden: idx === index,
             })}
-            onClick={() => onSelectCategory(category)}
+            onClick={() => selectCategory(category)}
           >
             {category.name ? category.name : '...'}
           </button>
@@ -87,7 +87,7 @@ export default function Categories() {
         <IconButton
           icon="mingcute:file-new-line"
           text={'New category'}
-          onClick={onNewCategory}
+          onClick={createCategory}
         />
       </div>
     </div>

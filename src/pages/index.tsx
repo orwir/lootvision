@@ -1,7 +1,6 @@
 import React from 'react';
-import Seo from '../components/seo';
+import Seo from '@/components/seo';
 import { graphql, Link } from 'gatsby';
-import clsx from 'clsx';
 
 export default function IndexPage({
   data,

@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
-import { CategoryContext, FilterContext } from './context';
-import Rule from './rule';
+import { CategoryContext, FilterContext } from '@/components/filter/context';
+import Rule from '@/components/filter/rule';
 
 export default function Category() {
   const { filter, setFilter } = useContext(FilterContext);
   const { category, setCategory } = useContext(CategoryContext);
 
-  function onRemoveCategory() {
+  function deleteCategory() {
     const index = Math.max(filter.categories.indexOf(category!) - 1, 0);
     const categories = filter.categories.filter((c) => c !== category);
 
@@ -27,9 +27,9 @@ export default function Category() {
           <div className="flex-grow" />
           <button
             className="self-end hover:text-teal-500"
-            onClick={onRemoveCategory}
+            onClick={deleteCategory}
           >
-            Remove category
+            Delete category
           </button>
         </div>
       )}
