@@ -24,7 +24,9 @@ export function obtainFilter(game: string, id: string): Filter | null {
 }
 
 export function removeFilter(filter: Filter): void {
-  // TODO: implement
+  const data: Record<string, Filter> = getItem('filters_' + filter.game) || {};
+  delete data[filter.id];
+  setItem('filters_' + filter.game, data);
 }
 
 export function saveFilter(filter: Filter): void {

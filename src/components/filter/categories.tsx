@@ -7,11 +7,10 @@ import { Category } from '@/lib/data';
 
 export default function Categories() {
   const { filter, setFilter } = useContext(FilterContext);
-  const { setCategory } = useContext(CategoryContext);
-  const [index, setIndex] = useState(0);
+  const { category, setCategory } = useContext(CategoryContext);
+  const index = category ? filter.categories.indexOf(category) : -1;
 
-  function onSelectCategory(index: number, category: Category) {
-    setIndex(index);
+  function onSelectCategory(category: Category) {
     setCategory(category);
   }
 
@@ -26,7 +25,6 @@ export default function Categories() {
       categories: [...filter.categories, category],
     });
     setCategory(category);
-    setIndex(filter.categories.length);
   }
 
   function onChangeCategoryName(category: Category, name: string) {
@@ -61,7 +59,7 @@ export default function Categories() {
         >
           {/* using hidden to avoid the bug where name change doesn't saved if element gone completely */}
           <Editable
-            className={clsx('mx-3 my-4 w-full text-left', {
+            className={clsx('mx-3 my-4 w-full truncate text-left', {
               hidden: idx !== index,
             })}
             text={category.name}
@@ -69,10 +67,10 @@ export default function Categories() {
             onTextChange={(name) => onChangeCategoryName(category, name)}
           />
           <button
-            className={clsx('w-full px-3 py-4 text-left', {
+            className={clsx('w-full truncate px-3 py-4 text-left', {
               hidden: idx === index,
             })}
-            onClick={() => onSelectCategory(idx, category)}
+            onClick={() => onSelectCategory(category)}
           >
             {category.name ? category.name : '...'}
           </button>
